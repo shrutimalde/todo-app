@@ -91,9 +91,12 @@ export class ToDoListComponent implements OnInit {
 
   deleteList(listName: string){
     this.listNameArr = JSON.parse(localStorage.getItem('to-do-list')  || '[]');
-    let index = this.listNameArr.findIndex(listName);
-    console.log(index);
-    
+    let index = this.listNameArr.findIndex((item: string) => item == listName);
+    this.listNameArr.splice(index,1);
+    localStorage.setItem('to-do-list',JSON.stringify(this.listNameArr));
+    localStorage.removeItem(listName);
+    localStorage.removeItem(listName+"Completed");
+    this.router.navigateByUrl('/to-do');
   }
 
   backToToDo(){

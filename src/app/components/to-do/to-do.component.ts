@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,7 +14,8 @@ export class ToDoComponent implements OnInit {
   listName: any = [];
   constructor(
     private router: Router,
-    public dialog: MatDialog)
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar)
     { }
 
   ngOnInit(): void {
@@ -22,10 +24,10 @@ export class ToDoComponent implements OnInit {
       this.listName.push("Today");
       localStorage.setItem('to-do-list',JSON.stringify(this.listName));
     }
-     for(let item of this.listName){
-      let listCount = JSON.parse(localStorage.getItem(item)  || '[]');
-      this.listNameCount.push(listCount.length);
-     }
+    for(let item of this.listName){
+    let listCount = JSON.parse(localStorage.getItem(item)  || '[]');
+    this.listNameCount.push(listCount.length);
+    }
   }
   
   addNewToDo(){
@@ -34,11 +36,17 @@ export class ToDoComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-      
       if(!this.listName.includes(result) && result != ''){
         this.listName.push(result);
         localStorage.setItem('to-do-list',JSON.stringify(this.listName));
+        this.listNameCount = [];
+        for(let item of this.listName){
+          let listCount = JSON.parse(localStorage.getItem(item)  || '[]');
+          this.listNameCount.push(listCount.length);
+        }
+      }
+      else if(result != ''){
+        this.snackBar.open(result + " is already added!","X");
       }
     });
   }

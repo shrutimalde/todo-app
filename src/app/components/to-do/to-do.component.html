@@ -9,12 +9,13 @@
     <h4>Today you have <span class="color-red">{{listNameCount[0]}}</span> tasks</h4>
     <div class="bootstrap-wrapper">
         <div class="row">
-            <div class="col-12 col-md-4" *ngFor="let item of listName; let i = index">
+            <div class="col-12 col-md-4 p-b-3" *ngFor="let item of listName; let i = index">
                 <mat-card class="pointer" (click)="goToList(item)">
                     <span class="custom-badge float-right">{{listNameCount[i]}}</span>
                     <mat-card-header>
                         <span class="material-icons color-yellow list-icon" mat-card-avatar>
-                            wb_sunny
+                            <span *ngIf="item == 'Today'">wb_sunny</span>
+                            <span *ngIf="item != 'Today'">checklist</span>
                         </span>
                         <mat-card-title>{{item}}</mat-card-title>
                     </mat-card-header>
