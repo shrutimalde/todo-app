@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>Add New To-Do</h1>
+<div mat-dialog-content>
+    <mat-form-field appearance="fill">
+        <mat-label>New To-Do List</mat-label>
+        <input matInput [(ngModel)]="listName">
+    </mat-form-field>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button color="primary" (click)="createNewToDo(listName)" mat-dialog-close cdkFocusInitial>Create</button>
+</div>

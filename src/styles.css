@@ -1,0 +1,96 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+html, body { height: 100%; box-sizing: border-box; }
+body { margin: 0;font-size: 13px; font-family: Roboto, "Helvetica Neue", sans-serif; }
+*, *:before, *:after {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+.container{
+    margin-left:4rem;
+    margin-right: 4rem;
+}
+@media only screen and (max-width: 600px) {
+  .container{
+    margin-left:2rem;
+    margin-right: 2rem;
+  }
+}
+.pointer{
+  cursor: pointer;
+}
+.p-0{
+  padding:0 !important;
+}
+.pr-3{
+  padding-right: 1rem;
+}
+.p-b-3{
+  padding-bottom: 1rem;
+}
+.m-b-0{
+  margin-bottom: 0;
+}
+.m-b-0-5{
+  margin-bottom: 0.5rem;
+}
+.m-t-10{
+  margin-top: 10px;
+}
+.w-100{
+  width:100%;
+}
+.color-black{
+  color: black;
+}
+.color-blue{
+  color: #1457c3;
+}
+.color-red{
+  color:red;
+}
+.color-grey{
+  color: #ccc;
+}
+.text-center{
+  text-align: center;
+}
+.float-left{
+  float: left;
+}
+.float-right{
+  float: right;
+}
+.color-yellow{
+  color: #e8e331;
+}
+.color-green{
+  color: green;
+}
+.list-icon{
+  font-size: 35px;
+}
+.material-icons{
+  vertical-align: middle;
+}
+.f-12{
+  font-size: 12px;
+}
+.f-18{
+  font-size: 18px;
+}
+.f-20{
+  font-size: 20px;
+}
+.mat-card-header .mat-card-title{
+  line-height: 2rem;
+}
+.custom-badge{
+  border: 1px solid #e8e331;
+  border-radius: 50%;
+  background-color: #e8e331;
+  color: #111;
+  padding: 8px 12px;
+  font-weight: 600;
+}

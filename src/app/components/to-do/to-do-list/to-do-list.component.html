@@ -1,0 +1,83 @@
+<div class="container">
+    <h1 class="title text-center">
+        <small (click)="backToToDo()" class="f-12 m-t-10 pointer float-left">
+            <span class="material-icons">
+                arrow_back_ios
+            </span>
+            Back to To-Do's</small>
+        <span class="material-icons color-yellow list-icon" mat-card-avatar>
+            wb_sunny
+        </span>
+        {{listName}}
+        <button mat-icon-button [matMenuTriggerFor]="menu" class="float-right">
+            <span class="material-icons list-icon">
+                more_vert
+            </span>
+        </button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="deleteList(listName)">
+                <span class="material-icons color-red f-18"> delete </span>
+                <span> Delete List </span>
+            </button>
+        </mat-menu>
+    </h1>
+    <hr>
+    <div class="bootstrap-wrapper">
+        <div class="row">
+            <div class="col-12 col-md-12">
+                <mat-card class="m-b-0-5">
+                    <mat-form-field appearance="fill" class="p-0 w-100">
+                        <input matInput type="text" placeholder="New Item" [(ngModel)]="newItem">
+                        <button mat-stroked-button color="primary" class="float-right" (click)="addItem(newItem)">
+                            Add
+                            <span class="material-icons f-20">add</span>
+                        </button>
+                    </mat-form-field>
+                </mat-card>
+
+                <form [formGroup]="toDoForm" class="p-b-3">
+                    <mat-card class="pointer m-b-0-5" *ngFor="let item of toDoList; let i=index">
+                        <ng-container *ngIf="editValue != item?.task">
+                            <p class="m-b-0">
+                                <mat-checkbox formControlName="todo" (change)="completeTask(i, item)">{{item?.task}} </mat-checkbox>
+                                <span class="float-right">
+                                    <span class="material-icons color-blue pointer f-20 pr-3" (click)="editItem(item)">
+                                        edit
+                                    </span>
+                                    <span class="material-icons color-red pointer f-20" (click)="deleteItem(i)">
+                                        delete
+                                    </span>
+                                </span>
+                            </p>
+                            <small class="color-grey">{{item?.createDate | date : 'dd-MMM-yyyy, h:mm a' }}</small>
+                        </ng-container>
+                        <ng-container *ngIf="editValue == item?.task">
+                            <mat-form-field appearance="fill" class="p-0 w-100">
+                                <input matInput type="text" value="{{item?.task}}" formControlName="editedValue">
+                                <button matSuffix mat-icon-button (click)="saveEditedItem(i, toDoForm.get('editedValue')?.value)">
+                                    <mat-icon class="color-blue f-20">check</mat-icon>
+                                </button>
+                            </mat-form-field>
+                        </ng-container>
+                    </mat-card>
+                </form>
+                
+
+                <details>
+                    <summary class="completed">Completed</summary>
+                    <mat-card class="pointer m-b-0-5" *ngFor="let item of completedList; let i=index">
+                        <p class="m-b-0">
+                            <mat-checkbox [checked]="true"><del>{{item?.task}}</del></mat-checkbox>
+                            <span class="float-right">
+                                <span class="material-icons color-blue pointer f-20 pr-3" (click)="undoItem(i, item)">
+                                    undo
+                                </span>
+                            </span>
+                        </p>
+                        <small class="color-grey">{{item?.createDate | date : 'dd-MMM-yyyy, h:mm a' }}</small>
+                    </mat-card>
+                </details>
+            </div>
+        </div>
+    </div>
+</div>
